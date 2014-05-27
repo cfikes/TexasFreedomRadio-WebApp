@@ -1,0 +1,421 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" />
+<title></title>
+
+<link rel="stylesheet" href="themes/txfreedom.min.css" />
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0/jquery.mobile.structure-1.4.0.min.css" />
+<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+
+<style type="text/css">
+#showinfo {
+	margin: auto;
+	text-align: center;
+	vertical-align: middle;
+	background-repeat: no-repeat;
+}
+#showinfo img {
+	vertical-align: middle;
+}
+#player {
+text-align: center;
+}
+.pcontrols {
+	margin: 1%;
+	text-align: center;
+}
+.pcontrols img {
+	height: 22%;
+}
+.customback {
+	background: url("linnenback.png") repeat;
+}
+#mshowtitle {
+	margin: 5px;
+}
+.helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+</style>
+
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
+
+<script type="text/javascript">
+$( document ).ready(function() {
+    var wheight = $(window).height();
+    var wwidth = $(window).width();
+    var iheight;
+    var bheight;
+    console.log(wheight);
+    
+    if (wheight>=wwidth) {
+	    iheight=wwidth*.80;
+		bheight=wwidth*.40;   
+    } else {
+	    iheight=wheight-180;
+		bheight=iheight*.40;	    
+    }
+    console.log(iheight);
+    updateShow(iheight);
+    window.setInterval(function(){ updateShow(iheight); }, 60000);
+
+    $("#sbutton").hide();
+	$("#showinfo").css({"height": iheight,"width": iheight,"background": "url(\"img/generic.jpg\")","background-size": iheight});
+	$("#pbutton").attr("height", bheight);
+	$("#sbutton").attr("height", bheight);	
+});
+
+$(window).resize(function() {
+    var wheight = $(window).height();
+    var wwidth = $(window).width();
+    var iheight;
+    var bheight;
+    console.log(wheight);
+    
+    if (wheight>=wwidth) {
+	    iheight=wwidth*.80;
+		bheight=wwidth*.40;   
+    } else {
+	    iheight=wheight-180;
+		bheight=iheight*.40;	    
+    }
+    console.log(iheight);
+    updateShow(iheight);
+
+   	$("#showinfo").css({"height": iheight,"width": iheight,"background": "url(\"img/generic.jpg\")","background-size": iheight});
+	$("#pbutton").attr("height", bheight);
+	$("#sbutton").attr("height", bheight);	
+});
+
+
+function fplay() {
+	$("#pbutton").hide();
+	$("#sbutton").show();
+	var audioPlayer = document.getElementById("shoutcast");
+    audioPlayer.play();
+	
+}
+function fpause() {
+	$("#sbutton").hide();
+	$("#pbutton").show();
+	var audioPlayer = document.getElementById("shoutcast");
+    audioPlayer.pause();
+    audioPlayer.currentTime = 0;
+}
+</script>
+
+</head>
+
+<body>
+
+<!-- Start of first page -->
+<div data-role="page" id="player" data-theme="a">
+
+	<div data-role="panel" data-display="overlay" data-theme="c" id="nav-panel0">
+		<ul data-role="listview">
+			<li data-role="list-divider" style="text-align:center;">Menu</li>
+
+			<li data-icon="audio"><a href="#player" data-transition="slide">Listen Online</a></li>
+
+			<li data-icon="grid"><a href="#newspage" data-transition="slide">News Feed</a></li>
+
+			<li data-icon="calendar"><a href="#eventspage" data-transition="slide">Events Feed</a></li>
+
+	    	<li data-icon="info"><a href="#showinfopage" data-transition="slide">Show Information</a></li>
+
+			<li data-icon="user"><a href="#stationinfopage" data-transition="slide">Station Information</a></li>
+
+			<li data-icon="cloud"><a href="#appinfopage" data-transition="slide">App Information</a></li>
+	    </ul>
+	</div>	 		
+     			
+	<div data-role="header">
+		<h1>TX Freedom Radio</h1>
+		<a href="#nav-panel0" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+	<div id="player">
+		<div id="showinfo">
+		<span class="helper"></span>
+			<img src="playbutton.png" id="pbutton" onclick="fplay();">
+			<img src="stopbutton.png" id="sbutton" onclick="fpause();">
+		</div>
+	<h3 id="mshowtitle"></h3>
+	</div>
+		<audio id="shoutcast">
+	<!--			<source src="http://streams4.museter.com:8516/;stream.mp3" type="audio/mp3"> -->
+			<source src="http://streams4.museter.com:8516/;stream.mp3&13202692901" type="audio/mp3">
+		</audio>
+	</div><!-- /content -->
+
+	<div data-role="footer" data-position="fixed">
+	    <div data-role="navbar">
+	      <ul>
+	        <li><a id="callin" href="tel:+18558541300" data-icon="phone">Call In</a></li>
+	        <li><a href="#nav-panel0" data-transition="slide" data-direction="reverse" data-icon="bars">Menu</a></li>
+	      </ul>
+	    </div>
+	  </div><!-- /footer -->
+</div><!-- /page -->
+
+
+<div data-role="page" id="showinfopage">
+
+	<div data-role="panel" data-display="overlay" data-theme="c" id="nav-panel1">
+		<ul data-role="listview">
+			<li data-role="list-divider" style="text-align:center;">Menu</li>
+
+			<li data-icon="audio"><a href="#player" data-transition="slide">Listen Online</a></li>
+
+			<li data-icon="grid"><a href="#newspage" data-transition="slide">News Feed</a></li>
+
+			<li data-icon="calendar"><a href="#eventspage" data-transition="slide">Events Feed</a></li>
+
+	    	<li data-icon="info"><a href="#showinfopage" data-transition="slide">Show Information</a></li>
+
+			<li data-icon="user"><a href="#stationinfopage" data-transition="slide">Station Information</a></li>
+
+			<li data-icon="cloud"><a href="#appinfopage" data-transition="slide">App Information</a></li>
+	    </ul>
+	</div>	 		
+	
+	<div data-role="header">
+		<h1>Show Information</h1>
+		<a href="#nav-panel1" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<ul data-role="listview" data-inset="true">
+		    <li data-role="list-divider"><span id="showtitle">Freedom Radio</span></li>
+		    <li><span id="showdesc">Show Information Goes Here</span></li>
+		</ul>
+	</div><!-- /content -->
+
+	<div data-role="footer" data-position="fixed">
+	    <div data-role="navbar">
+	      <ul>
+  	        <li><a href="#player" data-transition="slide" data-direction="reverse" data-icon="audio">Listen Online</a></li>
+  	        <li><a href="#nav-panel1" data-transition="slide" data-direction="reverse" data-icon="bars">Menu</a></li>
+  	      </ul>
+	    </div>
+	  </div><!-- /footer -->
+</div><!-- /page -->
+
+
+<!-- NEWS PAGE -->
+<div data-role="page" id="newspage">
+
+	<div data-role="panel" data-display="overlay" data-theme="c" id="nav-panel2">
+		<ul data-role="listview">
+			<li data-role="list-divider" style="text-align:center;">Menu</li>
+
+			<li data-icon="audio"><a href="#player" data-transition="slide">Listen Online</a></li>
+
+			<li data-icon="grid"><a href="#newspage" data-transition="slide">News Feed</a></li>
+
+			<li data-icon="calendar"><a href="#eventspage" data-transition="slide">Events Feed</a></li>
+
+	    	<li data-icon="info"><a href="#showinfopage" data-transition="slide">Show Information</a></li>
+
+			<li data-icon="user"><a href="#stationinfopage" data-transition="slide">Station Information</a></li>
+
+			<li data-icon="cloud"><a href="#appinfopage" data-transition="slide">App Information</a></li>
+	    </ul>
+	</div>	 		
+
+	<div data-role="header">
+		<h1>News Feed</h1>
+		<a href="#nav-panel2" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<ul id="nlist" data-role="listview" data-theme="b" data-filter="false">
+			<li id="nload">Loading Data...</li>
+		</ul>
+		<ul id="results" data-role="listview" data-theme="b">
+		</ul>
+    </div>
+
+	<div data-role="footer" data-position="fixed">
+	    <div data-role="navbar">
+	      <ul>
+  	        <li><a href="#player" data-transition="slide" data-direction="reverse" data-icon="audio">Listen Online</a></li>
+  	      	<li><a href="#nav-panel2" data-transition="slide" data-direction="reverse" data-icon="bars">Menu</a></li>
+  	      </ul>
+	    </div>
+	  </div><!-- /footer -->
+</div><!-- /page -->
+
+
+
+<!-- Start of Station Info page -->
+<div data-role="page" id="stationinfopage">
+
+<div data-role="panel" data-display="overlay" data-theme="c" id="nav-panel3">
+		<ul data-role="listview">
+			<li data-role="list-divider" style="text-align:center;">Menu</li>
+
+			<li data-icon="audio"><a href="#player" data-transition="slide">Listen Online</a></li>
+
+			<li data-icon="grid"><a href="#newspage" data-transition="slide">News Feed</a></li>
+
+			<li data-icon="calendar"><a href="#eventspage" data-transition="slide">Events Feed</a></li>
+
+	    	<li data-icon="info"><a href="#showinfopage" data-transition="slide">Show Information</a></li>
+
+			<li data-icon="user"><a href="#stationinfopage" data-transition="slide">Station Information</a></li>
+
+			<li data-icon="cloud"><a href="#appinfopage" data-transition="slide">App Information</a></li>
+	    </ul>
+	</div>	 		
+     
+
+	<div data-role="header">
+		<h1>TX Freedom Radio</h1>
+		<a href="#nav-panel3" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+	</div><!-- /header -->
+	
+	<div role="main" class="ui-content" >
+		<ul data-role="listview" data-inset="true" data-theme="c">
+		    <li data-role="list-divider" data-theme="c">Station Information</li>
+		    <li data-icon="action" data-theme="c"><a href="https://maps.google.com/maps?saddr=%22current+location%22&daddr=440+N+18th+St+%233,+Beaumont,+TX+77707&hl=en&sll=30.174198,-94.167849&sspn=0.365066,0.688019&geocode=FabRzQEds6Bi-inVmdJNZTA5hjGRXfJ8JOlKvg%3BFXoOywEdvJNj-ilfCDkYT8s-hjFh5ARUc0IJKw&mra=ls&t=m&z=12">
+		    <h3>Address</h3>
+		    <p>440 18th Street Suite 3<br>Beaumont TX 77707<br></p>
+		    </a></li>
+		    <li data-role="list-divider">Contact Information</li>
+		    <li data-icon="phone"><a href="tel:+14092270003">
+		    <h3>Office</h3>
+		    <p>(409) 227-0003</p>
+		    </a></li>
+		    <li data-icon="phone"><a href="tel:+14092270004">
+		    <h3>Show Call In</h3>
+		    <p>(409) 227-0004</p>
+		    </a></li>
+		    <li data-role="list-divider">FCC Information</li>
+		    <li>
+		    <h3>Call Sign: KSET</h3>
+		    <p>Licensee: PROCTOR-WILLIAMS, INC.<br></p>
+		    </li>
+		</ul>
+	</div><!-- /content -->
+
+	<div data-role="footer" data-position="fixed">
+	    <div data-role="navbar">
+	      <ul>
+  	        <li><a href="#player" data-transition="slide" data-direction="reverse" data-icon="audio">Listen Online</a></li>
+  	      	<li><a href="#nav-panel3" data-transition="slide" data-direction="reverse" data-icon="bars">Menu</a></li>
+	      </ul>
+	    </div>
+	  </div><!-- /footer -->
+</div><!-- /page -->
+
+
+<!-- App Info PAGE -->
+<div data-role="page" id="appinfopage"  data-theme="a">
+
+<div data-role="panel" data-display="overlay" data-theme="c" id="nav-panel4">
+		<ul data-role="listview">
+			<li data-role="list-divider" style="text-align:center;">Menu</li>
+
+			<li data-icon="audio"><a href="#player" data-transition="slide">Listen Online</a></li>
+
+			<li data-icon="grid"><a href="#newspage" data-transition="slide">News Feed</a></li>
+
+			<li data-icon="calendar"><a href="#eventspage" data-transition="slide">Events Feed</a></li>
+
+	    	<li data-icon="info"><a href="#showinfopage" data-transition="slide">Show Information</a></li>
+
+			<li data-icon="user"><a href="#stationinfopage" data-transition="slide">Station Information</a></li>
+
+			<li data-icon="cloud"><a href="#appinfopage" data-transition="slide">App Information</a></li>
+	    </ul>
+	</div>	 		
+
+	<div data-role="header">
+		<h1>App Information</h1>
+		<a href="#nav-panel4" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<p>Development by FikesMedia.</p>
+		<p>For more information please visit <a href="http://www.fikesmedia.com/">http://www.FikesMedia.com/</a></p>
+		<ul data-role="listview" data-inset="true">
+				<li data-role="list-divider">FikesMedia News and Media Mobile Application</li>
+				<li data-icon="bullets"><a>Cross Platform</a></li>
+				<li data-icon="recycle"><a>Dynamically Updated</a></li>
+				<li data-icon="grid"><a>Responsive Design</a></li>
+				<li data-icon="clock"><a>Fast Deployment</a></li>
+				<li data-icon="user"><a>Complete Customization</a></li>
+		</ul>
+    </div>
+
+	<div data-role="footer" data-position="fixed">
+	    <div data-role="navbar">
+	      <ul>
+  	        <li><a href="#player" data-transition="slide" data-direction="reverse" data-icon="audio">Listen Online</a></li>
+  	      	<li><a href="#nav-panel4" data-transition="slide" data-direction="reverse" data-icon="bars">Menu</a></li>
+  	      </ul>
+	    </div>
+	  </div><!-- /footer -->
+</div><!-- /page -->
+
+
+<!-- Events PAGE -->
+<div data-role="page" id="eventspage">
+
+<div data-role="panel" data-display="overlay" data-theme="c" id="nav-panel5">
+		<ul data-role="listview">
+			<li data-role="list-divider" style="text-align:center;">Menu</li>
+
+			<li data-icon="audio"><a href="#player" data-transition="slide">Listen Online</a></li>
+
+			<li data-icon="grid"><a href="#newspage" data-transition="slide">News Feed</a></li>
+
+			<li data-icon="calendar"><a href="#eventspage" data-transition="slide">Events Feed</a></li>
+
+	    	<li data-icon="info"><a href="#showinfopage" data-transition="slide">Show Information</a></li>
+
+			<li data-icon="user"><a href="#stationinfopage" data-transition="slide">Station Information</a></li>
+
+			<li data-icon="cloud"><a href="#appinfopage" data-transition="slide">App Information</a></li>
+	    </ul>
+	</div>	 		
+
+	<div data-role="header">
+		<h1>Events Feed</h1>
+		<a href="#nav-panel5" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<ul id="nlist" data-role="listview" data-theme="b" data-filter="false">
+			<li id="nload">Loading Data...</li>
+		</ul>
+		<ul id="results" data-role="listview" data-theme="a">
+		</ul>
+    </div>
+
+	<div data-role="footer" data-position="fixed">
+	    <div data-role="navbar">
+	      <ul>
+  	        <li><a href="#player" data-transition="slide" data-direction="reverse" data-icon="audio">Listen Online</a></li>
+  	      	<li><a href="#nav-panel5" data-transition="slide" data-direction="reverse" data-icon="bars">Menu</a></li>
+  	      </ul>
+	    </div>
+	  </div><!-- /footer -->
+</div><!-- /page -->
+
+<!--<script src="cordova.js"></script>-->
+<script src="phonegap.js"></script>
+<script src="showdb.js"></script>
+<script src="news.js"></script>
+<script src="events.js"></script>
+
+</body>
+
+
+</html>
